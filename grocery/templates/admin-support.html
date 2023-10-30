@@ -1,0 +1,84 @@
+{% extends '/static.html' %}
+
+{% block head %}
+<title>Admin Store Managment</title>
+<style>
+    body{
+        background-color: lightgray;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        border-color: #96D4D4;
+    }
+</style>
+{% endblock head %}
+{% block border %} 
+<body>
+{% endblock border %}
+{% block body %}
+<h2>Dashboard</h2>
+<p>Manage every thing from single window.</P>
+<hr>
+
+<h3>Customer Support Window</h3>
+<hr>
+<h5>Support answer given in mail</h5>
+<table class="report">
+    <tr>
+        <th>SNo.</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Name</th>
+    </tr>
+    {% for report in reports %}
+    <tr>
+        <td>{{report.id}}</td>
+        <td>{{report.remark}}</td>
+        <td>{{report.status}}</td>
+        <td>{{report.date}}</td>
+        <td>{{report.name}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+<h5>Customers Contact for Support listed below</h5>
+<table class="contact">
+    <tr>
+        <th>SNo.</th>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Message</th>
+        <th>Date</th>
+    </tr>
+    {% for contact in contacts %}
+    <tr>
+        <td>{{contact.id}}</td>
+        <td>{{contact.name}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.message}}</td>
+        <td>{{contact.date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<form action='' method='POST'>
+    <div class="form-control">
+        <lable for="message">Remark</lable><br>
+        <input type="text" id="message" name="remark" placeholder="Remark" required><br>
+    </div>
+    <div class="form-control">
+    <lable for="status">Type 1 for Done 0 for Pending</lable><br>
+    <input type="number" id="status" name="status" placeholder="Status" required><br>
+    </div>
+    <div class="form-control">
+    <lable for="name">Customer Name</lable><br>
+    <input type="text" id="name" name="name" placeholder="Name" required><br>
+    </div>
+    <input type="submit" Value="Submit">
+    <input type="reset">
+</form>
+{% endblock body %}

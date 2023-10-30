@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+.profile-pic {
+  color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.profile-pic input {
+  display: none;
+}
+.profile-pic img {
+  position: absolute;
+  object-fit: cover;
+  width: 165px;
+  height: 165px;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+  border-radius: 100px;
+  z-index: 0;
+}
+.profile-pic .-label {
+  cursor: pointer;
+  height: 165px;
+  width: 165px;
+}
+.profile-pic:hover .-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  color: #fafafa;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 100px;
+  margin-bottom: 0;
+}
+.profile-pic span {
+  display: inline-flex;
+  padding: 0.2em;
+  height: 2em;
+}
+body a:hover {
+  text-decoration: none;
+}
+</style>
+{% endblock head %}
+
+{% block border %}
+<body>
+    <title>{{data.username}}</title>
+{% endblock border %}
+
+{% block body %}
+<h2 style="text-align:center"></h2>
+<div class="card">
+  {% if data %}
+  <form method="POST" action="/myprofile.html" class="profile-pic" enctype="multipart/form-data" >
+    <label class="-label" for="file">
+      <span class="glyphicon glyphicon-camera"></span>
+      <span>Change Image</span>
+    </label>
+    <input name="image_file" id="file" type="file" onchange="loadFile(event)" oninput="this.form.submit()" />
+    <input name="email" hidden value={{data.email}}>
+    <img src="{{url_for('static',filename=data.image_file)}}" id="output" width="200" />
+  </form>
+  
+    <h1>{{data.name}}</h1>
+    <h3>username: {{data.username}}</h3>
+    {% endif %}
+    
+    {% if data %}
+    <p>address: {{data.address}}</p>
+    {% endif %}
+
+  <hr/>
+  {% if data %}
+  <div style="margin: 4px 0;">
+    <p>{{data.email}}</p>
+  {% endif %}
+  <p><button onclick="document.location.href='/user/pswreset';">Reset Password</button></p>
+  </div>
+</div>
+<script>
+  var loadFile = function (event) {
+    var image = document.getElementById("output");
+    image.src = URL.createObjectURL(event.target.files[0]);
+  };
+  
+</script>
+{% endblock body %}

@@ -1,0 +1,83 @@
+{% extends 'static.html' %}
+
+{% block head %}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+      }
+      
+      .title {
+        color: grey;
+        font-size: 18px;
+      }
+      
+      button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+      }
+      
+      a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+      }
+      
+      button:hover, a:hover {
+        opacity: 0.7;
+      }
+      .profile-pic:hover .-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        color: #fafafa;
+        transition: background-color 0.2s ease-in-out;
+        border-radius: 100px;
+        margin-bottom: 0;
+      }
+      .profile-pic span {
+        display: inline-flex;
+        padding: 0.2em;
+        height: 2em;
+      }
+      body a:hover {
+        text-decoration: none;
+      }
+</style>
+{% endblock head %}
+{% block border %}
+<body>
+    <title>Edit - {{data.name}}</title>
+{% endblock border %}
+{% block body %}
+<h2 style="text-align:center"></h2>
+<div class="card">
+    <form method="POST" action="/admin/section/edit/{{data.section_name}}" class="profile-pic" enctype="multipart/form-data" >
+        <input name="image" id="file" type="file" onchange="loadFile(event)"/>
+        <img src="{{url_for('static',filename=data.image)}}" id="output" width="200" />
+
+        <h3>Section name: <input type="text" name="name" placeholder="{{data.section_name}}"></h3>
+        <h5>Category: <input type="text" name="category" placeholder="{{data.category}}"></h5>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+</div>
+<script>
+  var loadFile = function (event) {
+    var image = document.getElementById("output");
+    image.src = URL.createObjectURL(event.target.files[0]);
+  };
+</script>
+{% endblock body %}

@@ -1,0 +1,103 @@
+{% extends 'static.html' %}
+
+{% block head %}
+<style>
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+</style>
+{% endblock head %}
+{% block border %}
+<body>
+    <title>{{a}}</title>
+{% endblock border %}
+
+{% block body %}
+{% for da in data %}
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src={{url_for('static',filename=da.image)}} alt="Category image">
+    <div class="card-body">
+      <h5 class="card-title">{{da.product_name}}</h5>
+      <p class="card-text">{{da.details}}</p>
+      <p class="card-text">Price: {{da.price}}, Unit: {{da.unit}}</p>
+      <p class="card-text">Stock: {{da.stock}}, expiry: {{da.expiry}}</p>
+      <a href="/admin/product/delete/{{da.product_name}}/{{da.section_name}}" class="btn btn-danger">Delete</a>
+      <a href='/admin/product/edit/{{da.product_name}}' class="btn btn-warning">Edit</a>
+    </div>
+</div>
+<br>
+{% endfor %}
+{% if a %}
+<button class="open-button" onclick="openForm()" title="add product">&plus;</button>
+<div class="form-popup" id="myForm">
+<div class="content-section" style="display:flex; justify-content: left; background-color:bisque">
+    <form action="/admin/products/view/{{a}}" method="POST" enctype="multipart/form-data">
+      {{form.hidden_tag()}}
+        <fieldset class="form-group">
+          <legend class="border-bottom">Add Products</legend>
+            <div class="form-group">
+                {{form.name.label(class="form-control-label")}}
+                {{form.name(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.detail.label(class="form-control-label")}}
+                {{form.detail(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.price.label(class="form-control-label")}}
+                {{form.price(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.expiry.label(class="form-control-label")}}
+                {{form.expiry(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.stock.label(class="form-control-label")}}
+                {{form.stock(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.unit.label(class="form-control-label")}}
+                {{form.unit(class="form-control")}}
+            </div>
+            <div class="form-group">
+                <input name="image" type="file" title="product-image" aria-label="display image">
+            </div>
+        </fieldset>
+            <div class="form-group mb-4">
+                {{form.submit(class="btn btn-outline-success")}}
+                <button type="button" class="btn btn-danger" onclick="closeForm()">Close</button>
+            </div>
+    </form>
+</div>
+</div>
+  <script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+      
+      function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+  </script>
+{% endif %}
+{% endblock body %}

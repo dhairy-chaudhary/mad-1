@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
+  #full{
+    text-align: center;
+    text-decoration-color: aliceblue;
+    margin: 10%
+  }
+</style>
+{% endblock head %}
+
+{% block border %}
+<body>
+  <title>{{data[0].category}}</title>
+{% endblock border %}
+
+{% block body %}
+{% if data[0].product_name %}
+{% for da in data %}
+<form action="/product/{{da.section_name}}" method="post" class="card">
+  <img src={{url_for('static',filename=da.image)}} alt="" style="width:100%">
+  <h1>{{da.product_name}}</h1>
+  <input name="name" hidden value="{{da.product_name}}">
+  <p class="price">₨ {{da.price}} Unit:{{da.unit}}</p>
+  <p>expiry: {{da.expiry}}</p>
+  <input name="price" hidden value={{da.price}}>
+  <p>{{da.detail}}</p>
+  {% if da.stock > 0 %}
+  <p>Quntity <input type="number" name="stock" placeholder="01"></p>
+  <p><button type="submit" name="add" id="add" onclick="form.submit()">Add to Cart</button></p>
+  {% else %}
+  <p style="background-color: #000;color:aliceblue">Out of Stock</p>
+  {% endif %}
+</form>
+{% endfor %}
+{% else %}
+<h3 id="full">Not Available</h3>
+<p style="text-align: center;" id="full">the product you are looking for is not available.</p>
+{% endif %}
+{% endblock body %}
+
+

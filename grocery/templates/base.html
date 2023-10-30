@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="homepage">
+    <meta name="author" content="Dhairy">
+    <meta name="generator" content="Hugo 0.111.3">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='img/cart0.png')}}"/>
+    <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <style>
+      /* Popup container - can be anything you want */
+      .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      
+      /* The actual popup */
+      .popup .popuptext {
+        visibility: hidden;
+        width: 160px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -80px;
+      }
+      
+      /* Popup arrow */
+      .popup .popuptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+      
+      /* Toggle this class - hide and show the popup */
+      .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+      }
+      
+      /* Add animation (fade in the popup) */
+      @-webkit-keyframes fadeIn {
+        from {opacity: 0;} 
+        to {opacity: 1;}
+      }
+      
+      @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity:1 ;}
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+      
+      </style>
+
+{% block head %}{% endblock head %}
+  </head>    
+
+{% block border %}
+
+{% endblock border %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{category}}">
+        {{message}}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>FIRST-15</strong> : 15% instant discount and free delivery for the first time user.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<header class="site-header sticky-top py-1">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{url_for('home')}}">Grocery</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('home')}}"><button type="button"
+                class="btn btn-primary">Home</button></a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{{url_for('checkout')}}"><button type="button" class="btn btn-primary">Cart
+              <span class="badge bg-secondary">{{n}}</span>
+            </button></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{{url_for('myaccount')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% if current_user.is_authenticated %}
+              <span><img src={{url_for('static',filename=current_user.image_file)}} alt="img" width="25px" height="25px"> </span> 
+              <span class="badge bg-success text-dark">{{current_user.username}}</span>
+              {% else %}
+              <span class="badge bg-info text-dark">Profile</span>
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if current_user.is_authenticated %}
+              <li><a class="dropdown-item" href="{{url_for('myaccount')}}">MyProfile</a></li>
+              <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{{url_for('login')}}">Login</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="{{url_for('orders')}}">MyOrders</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{{url_for('support')}}">Support</a></li>
+            </ul>
+        </ul>
+        <form class="d-flex" method="post" action="/search">
+          <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+{% block body %}
+
+{% endblock body %}
+
+
+<hr/>
+<footer class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mb-2" role="img" viewBox="0 0 24 24">
+          <title>Marketplace</title>
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
+        </svg>
+        <p>Marketplace</p>
+        <small class="d-block mb-3 text-body-secondary">&copy; 2023</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="{{url_for('myaccount')}}">
+            MyProfile
+          </a></li>
+          <li><a class="link-secondary" href="{{url_for('today')}}">
+            Special offer
+          </a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><div class="popup" onclick="myFunction()">Privacy
+            <span class="popuptext" id="myPopup">
+              We care for your privacy, no data is share with anyone
+            </span>
+          </div></li>
+          <li><div class="popup" onclick="myFunction01()">Terms
+            <span class="popuptext" id="myPopup-01">
+              Terms of use are very simple, no malpractices and misinformation.
+            </span>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+    
+  </footer>
+  
+  
+      <script src="{{url_for('static',filename='/js/bootstrap.bundle.min.js')}}"></script>
+      <script>
+        // When the user clicks on Privacy, open the popup
+        function myFunction() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        // When the user clicks on Terms, open the popup
+        }
+        function myFunction01() {
+          var popup = document.getElementById("myPopup-01");
+          popup.classList.toggle("show");
+        }
+        </script>
+  {% block footer %}{% endblock footer %}
+        
+    </body>
+  </html>
+  

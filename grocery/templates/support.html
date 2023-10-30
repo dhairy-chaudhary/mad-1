@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+    body {
+        
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: cursive;
+        background-image: url('{{url_for('static',filename='/img/bg01.jfif')}}');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    input,
+        textarea {
+        width: 100%;
+        padding: 5px;
+        outline: none;
+    }
+
+    label {
+        line-height: 1.9rem;
+    }
+
+    input[type="submit"] {
+        transform: translate(2.2%);
+        padding: 3px;
+        margin-top: 0.6rem;
+        font-family: cursive;
+        font-weight: bold;
+    }
+
+    fieldset {
+        padding: 20px 40px;
+    }
+</style>
+{% endblock head %}
+
+{% block border %}
+<body>
+<title>Contact . Support</title>
+{% endblock border %}
+
+
+{% block body %}
+<div class="content-section" style="display:flex; justify-content: center; ">
+  <form action="" method="POST">
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Contact us</legend>
+        <div class="form-group">
+          {{form.name.label(class="form-control-label")}}
+          {{form.name(class="form-control form-control-lg")}}
+        </div>
+
+        <div class="form-group">
+          {{form.email.label(class="form-control-label")}}
+          {{form.email(class="form-control form-control-lg")}}
+        </div>
+
+        <div class="form-group">
+          {{form.message.label(class="form-control-label")}}
+          {{form.message(class="form-control form-control-lg")}}
+        </div>
+      </fieldset>
+      <div class="form-group">
+        {{form.submit(class="btn btn-outline-warning")}}
+      </div>
+  </form>
+</div>
+{% endblock body %}

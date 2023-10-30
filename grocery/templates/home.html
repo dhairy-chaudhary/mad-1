@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+  .parallax {
+    /* The image used */
+    background-image: url("{{url_for('static', filename='img/fruits-mix-1.jpg')}}");
+  
+    /* Set a specific height */
+    min-height: 500px; 
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .caption {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+  }
+  
+  .caption span.border {
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+  }
+  </style>
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='/css/product.css')}}" rel="stylesheet">
+  <style>
+    .divbackg {
+      background-image: url(https://cdn.pixabay.com/photo/2018/05/04/20/01/website-3374825_1280.jpg);
+    }
+  </style>
+{% endblock head %}
+{% block border %}
+<body>
+  <title>Home . Marketplace</title>
+{% endblock border %}
+{% block body %}
+<main>
+  <div class="parallax">
+    <div class="caption">
+      <span class="border">Marketplace</span><span class="border">Everyday</span><span class="border">Shoping</span>
+    </div>
+  </div>
+  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
+    <div class="divbackg">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 fw-normal">New Deals</h1>
+        <p class="lead fw-normal">Sunday offer - buy two and get one free</p>
+        <a class="btn btn-outline-secondary" href="today.html">Coming soon</a>
+      </div>
+    </div>
+  </div>
+  <center>
+  {% for ca in cate %}
+  <div class="d-md-flex flex-md-equal w-50 my-md-3 ps-md-3">
+    {% if 'd' in ca.name %}
+    <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 py-3">
+        <h2 class="display-5">{{ca.name}}</h2>
+        <p class="lead">{{ca.details}}</p>
+      </div>
+      <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+        <img src="{{url_for('static', filename=ca.image)}}" alt="Vegitables and Fruits" usemap="#workmap{{ca.id}}" style="width:100%;">
+        <map name="workmap{{ca.id}}">
+          <area shape="rect" coords="0,0,1500,1000" alt="Vegitables&Fruits" href="/section/{{ca.name}}">
+        </map>
+      </div>
+    </div>
+    {% elif 'K' in ca.name and not 'd' in ca.name %}
+    <div class="text-bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 py-3">
+        <h2 class="display-5">{{ca.name}}</h2>
+        <p class="lead">{{ca.details}}</p>
+      </div>
+      <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+        <img src="{{url_for('static', filename=ca.image)}}" alt="Kitchen Essential" usemap="#workmap{{ca.id}}" style="width:100%;">
+        <map name="workmap{{ca.id}}">
+          <area shape="rect" coords="0,0,1500,1000" alt="essential" href="/section/{{ca.name}}">
+        </map>
+      </div>
+    </div>
+    {% else %}
+    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 p-3">
+        <h2 class="display-5">{{ca.name}}</h2>
+        <p class="lead">{{ca.details}}</p>
+      </div>
+      <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+        <img src="{{url_for('static', filename=ca.image)}}" alt="Tools" usemap="#workmap{{ca.id}}" style="width:100%;">
+        <map name="workmap{{ca.id}}">
+          <area shape="rect" coords="0,0,1500,1000" alt="Tools" href="/section/{{ca.name}}">
+        </map>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  <center>
+</main>
+{% endblock body %}

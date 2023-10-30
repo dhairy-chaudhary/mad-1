@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+  body{
+      background-image: url('{{url_for('static',filename='/img/bg02.webp')}}');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+  }
+</style>
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='/css/sign-in.css')}}" rel="stylesheet">
+{% endblock head %}
+{% block border %}
+  <body class="text-center">
+    <title>Login</title>
+{% endblock border %}
+{% block body %}
+    <main class="form-signin w-100 m-auto">
+      <form method="Post", action="/login.html">
+        <img class="mb-4" src="{{url_for('static', filename = '/img/site-logo.png')}}" alt="" width="172" height="157">
+        <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+        <p style="font-size: x-large; color: red">{{message}}</p>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <small class="text-muted ml-2 mb-2">
+          Forget password <a href="{{url_for('forget_psw')}}">reset</a> now
+        </small>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="True" name='remember'> Remember me
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+        <div class="border-top pt-3">
+          <small class="text-muted">
+            Don't have account <a href="{{url_for('signin')}}">Sign-in</a> now
+          </small>
+        </div>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; 2023 Marketpalce</p>
+      </form>
+    </main>
+{% endblock body %}

@@ -1,0 +1,29 @@
+{% extends 'static.html' %}
+class="h-100"
+{% block head %}
+<script src="{{url_for('static',filename='js/color-modes.js')}}"></script>
+<!-- Custom styles for this template -->
+<link href="{{url_for('static',filename='/css/cover.css')}}" rel="stylesheet">
+<title>Home . Admin</title>
+{% endblock head %}
+
+{% block border %}
+<body class="d-flex h-100 text-center text-bg-dark">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+{% endblock border %}
+{% block body %}
+
+<br>
+<br>
+<main class="px-3">
+  <h1>Store Management Window</h1>
+  <p class="lead">
+    Manage everything from single window,
+  </p>
+  <p class="lead">
+    <a href="/admin/dashboard" class="btn btn-lg btn-light fw-bold border-white bg-white">View Dashboard</a>
+  </p>
+</main>
+<br>
+<br>
+{% endblock body %}

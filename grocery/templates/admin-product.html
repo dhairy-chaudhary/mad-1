@@ -1,0 +1,58 @@
+{% extends 'static.html' %}
+
+{% block head %}
+<style>
+    #pro {
+        display: block;
+        align-items: center;
+        margin: 15px;
+        padding: 9px;
+    }
+</style>
+{% endblock head %}
+
+{% block border %}
+<body>
+{% endblock border %}
+
+
+{% block body %}
+<main class="form-signin w-100 m-auto">
+    <form action="" method="post" id="pro" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Product Register</legend>
+            <div class="form-group">
+                {{form.name.label(class="form-control-label")}}
+                {{form.name(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.detail.label(class="form-control-label")}}
+                {{form.detail(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.price.label(class="form-control-label")}}
+                {{form.price(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.expiry.label(class="form-control-label")}}
+                {{form.expiry(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.stock.label(class="form-control-label")}}
+                {{form.stock(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.unit.label(class="form-control-label")}}
+                {{form.unit(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                <input name="image" type="file" title="product-image" aria-label="display image">
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{form.submit(class="btn btn-outline-info")}}
+        </div>
+    </form>
+</main>
+{% endblock body %}

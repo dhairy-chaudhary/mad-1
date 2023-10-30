@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
+  
+  
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+  
+.card button:hover {
+    opacity: 0.7;
+}
+#full{
+    text-align: center;
+    text-decoration-color: aliceblue;
+    margin: 10%
+}
+</style>
+{% endblock head %}
+
+{% block border %}
+<body>
+  <title>{{data[0].category}}</title>
+{% endblock border %}
+
+{% block body %}
+{% if data[0].section_name %}
+{% for da in data %}
+<br>
+<div class="card">
+    <img src="{{url_for('static',filename=da.image)}}" alt="img" style="width:100%">
+    <h1>{{da.section_name}}</h1>
+    <a href="/product/{{da.section_name}}"><button type="submit" name="add" id="add" onclick="">View</button></a>
+</div>
+<br>
+{% endfor %}
+{% else %}
+<h3 id="full">Not Available</h3>
+<p style="text-align: center;" id="full">This category doesn't have any section.</p>
+{% endif %}
+{% endblock body %}

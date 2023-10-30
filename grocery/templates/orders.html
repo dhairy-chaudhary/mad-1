@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+body {
+    background-image: url('{{url_for('static',filename='/img/bg01.jfif')}}');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+</style>
+<title>My Orders</title>
+{% endblock head %}
+
+
+{% block boarder %}
+<body>
+{% endblock boarder %}
+
+
+{% block body %}
+<hr/>
+{% for da in data %}
+<div class="card" style="width: fit-content;">
+  <div class="container">
+    <small>OrderId: {{da[0]}}</small>
+    <h5>Payment: {{da[3]}}</h5>
+    <p>Address: {{da[4]}}</p>
+    <p>Ordered at: {{da[2]}}</p>
+    {% for d in da[1] %}
+    <hr>
+    <p>Product name: {{d[0]}}, Price: Rs {{d[2]}}</p>
+    <p>unit: {{d[3]}}, quantity: {{d[1]}}</p>
+    <p>Total amount: {{d[1]*d[2]}}</p>
+    {% endfor %}
+  </div>
+</div>
+<br>
+{% endfor %}
+{% endblock body %}
